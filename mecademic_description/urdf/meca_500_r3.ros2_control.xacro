@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="meca_500_r3_ros2_control" params="
+    name
+    prefix
+    robot_ip
+    acceleration_limit
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    initial_positions:=${dict(axis_1_joint=0.0,axis_2_joint=0.0,axis_3_joint=0.0,axis_4_joint=0.0,axis_5_joint=0.0,axis_6_joint=0.0)}">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <xacro:if value="${use_fake_hardware}">
+          <plugin>fake_components/GenericSystem</plugin>
+          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="state_following_offset">0.0</param>
+        </xacro:if>
+        <xacro:unless value="${use_fake_hardware}">
+          <plugin>robot_interface/mecademic/MecademicInterface</plugin>
+          <param name="robot_ip">${robot_ip}</param>
+          <param name="acceleration_limit">${acceleration_limit}</param>
+        </xacro:unless>
+      </hardware>
+      <joint name="${prefix}axis_1_joint">
+        <command_interface name="position">
+          <param name="min">-3.05433</param>
+          <param name="max">3.05433</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-2.61799</param>
+          <param name="max">2.61799</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_1_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+      <joint name="${prefix}axis_2_joint">
+        <command_interface name="position">
+          <param name="min">-1.22173048</param>
+          <param name="max">1.5708</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-2.61799</param>
+          <param name="max">2.61799</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_2_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+      <joint name="${prefix}axis_3_joint">
+        <command_interface name="position">
+          <param name="min">-2.35619</param>
+          <param name="max">1.22173048</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-3.14159</param>
+          <param name="max">3.14159</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_3_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+      <joint name="${prefix}axis_4_joint">
+        <command_interface name="position">
+          <param name="min">-2.96706</param>
+          <param name="max">2.96706</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-5.23599</param>
+          <param name="max">5.23599</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_4_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+      <joint name="${prefix}axis_5_joint">
+        <command_interface name="position">
+          <param name="min">-2.00713</param>
+          <param name="max">2.00713</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-5.23599</param>
+          <param name="max">5.23599</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_5_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+      <joint name="${prefix}axis_6_joint">
+        <command_interface name="position">
+          <param name="min">-3.14159</param>
+          <param name="max">3.14159</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-8.72665</param>
+          <param name="max">8.72665</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <param name="initial_position">${initial_positions['axis_6_joint']}</param>  <!-- initial position for the FakeSystem -->
+      </joint>
+    </ros2_control>
+  </xacro:macro>
+
+</robot>
