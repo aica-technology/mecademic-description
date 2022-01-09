@@ -5,6 +5,8 @@
     name
     prefix
     robot_ip
+    control_port
+    monitoring_port
     acceleration_limit
     use_fake_hardware:=false
     fake_sensor_commands:=false
@@ -20,6 +22,8 @@
         <xacro:unless value="${use_fake_hardware}">
           <plugin>robot_interface/mecademic/MecademicInterface</plugin>
           <param name="robot_ip">${robot_ip}</param>
+          <param name="control_port">${control_port}</param>
+          <param name="monitoring_port">${monitoring_port}</param>
           <param name="acceleration_limit">${acceleration_limit}</param>
         </xacro:unless>
       </hardware>

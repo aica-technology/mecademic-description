@@ -4,6 +4,8 @@
   <xacro:macro name="meca_500_r3_robot" params="
     prefix
     robot_ip
+    control_port
+    monitoring_port
     connected_to:=''
     acceleration_limit
     use_fake_hardware:=false
@@ -17,6 +19,8 @@
       name="MecademicInterface"
       prefix="${prefix}"
       robot_ip="$(arg robot_ip)"
+      control_port:="$(arg control_port)"
+      monitoring_port:="$(arg monitoring_port)"
       acceleration_limit="$(arg acceleration_limit)"
       use_fake_hardware="$(arg use_fake_hardware)"
       fake_sensor_commands="$(arg fake_sensor_commands)"
