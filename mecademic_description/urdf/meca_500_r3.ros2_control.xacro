@@ -7,7 +7,9 @@
     robot_ip
     control_port
     monitoring_port
-    acceleration_limit
+    velocity_timeout
+    velocity_limit_percent
+    acceleration_limit_percent
     use_fake_hardware:=false
     fake_sensor_commands:=false
     initial_positions:=${dict(axis_1_joint=0.0,axis_2_joint=0.0,axis_3_joint=0.0,axis_4_joint=0.0,axis_5_joint=0.0,axis_6_joint=0.0)}">
@@ -24,7 +26,9 @@
           <param name="robot_ip">${robot_ip}</param>
           <param name="control_port">${control_port}</param>
           <param name="monitoring_port">${monitoring_port}</param>
-          <param name="acceleration_limit">${acceleration_limit}</param>
+          <param name="velocity_timeout">${velocity_timeout}</param>
+          <param name="velocity_limit_percent">${velocity_limit_percent}</param>
+          <param name="acceleration_limit_percent">${acceleration_limit_percent}</param>
         </xacro:unless>
       </hardware>
       <joint name="${prefix}axis_1_joint">
