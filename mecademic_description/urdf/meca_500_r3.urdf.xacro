@@ -23,8 +23,8 @@
   <xacro:meca_500_r3_robot
     prefix="$(arg prefix)"
     robot_ip="$(arg robot_ip)"
-    control_port:="$(arg control_port)"
-    monitoring_port:="$(arg monitoring_port)"
+    control_port="$(arg control_port)"
+    monitoring_port="$(arg monitoring_port)"
     connected_to="$(arg connected_to)"
     velocity_timeout="$(arg velocity_timeout)"
     velocity_limit_percent="$(arg velocity_limit_percent)"
