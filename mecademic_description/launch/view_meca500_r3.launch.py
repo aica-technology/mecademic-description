@@ -41,6 +41,7 @@ def generate_launch_description():
     # Initialize Arguments
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
+    name = LaunchConfiguration("name")
     prefix = LaunchConfiguration("prefix")
 
     robot_description_content = Command(
