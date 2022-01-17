@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(mecademic_description)
 
-find_package(catkin REQUIRED COMPONENTS)
+find_package(ament_cmake REQUIRED)
 
-catkin_package()
-
-include_directories(
-  ${catkin_INCLUDE_DIRS}
+install(
+  DIRECTORY launch meshes rviz urdf
+  DESTINATION share/${PROJECT_NAME}
 )
+
+ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+
+ament_package()
