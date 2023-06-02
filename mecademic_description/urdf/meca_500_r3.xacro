@@ -205,6 +205,14 @@
       <limit effort="10.0" velocity="8.72665" lower="-3.14159" upper="3.14159" />
     </joint>
 
+    <link name="${prefix}tool0"/>
+
+    <joint name="${prefix}tool_joint" type="fixed">
+      <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+      <parent link="${prefix}axis_6_link"/>
+      <child link="${prefix}tool0"/>
+    </joint>
+
     <!-- TODO ROS-Industrial 'base', 'flange' and 'tool0' frames -->
   </xacro:macro>
 </robot>
