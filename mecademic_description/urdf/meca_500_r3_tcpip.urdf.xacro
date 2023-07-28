@@ -3,7 +3,7 @@
   <xacro:arg name="prefix" default="meca_500_" />
   <xacro:arg name="connected_to" default="" />
 
-  <xacro:arg name="load_ros2_control" default="true"/>
+  <xacro:arg name="load_ros2_control" default="true" />
   <xacro:arg name="robot_ip" default="192.168.0.100" />
   <xacro:arg name="control_port" default="10000" />
   <xacro:arg name="monitoring_port" default="10001" />
@@ -11,19 +11,18 @@
   <xacro:arg name="velocity_limit_percent" default="25.0" />
   <xacro:arg name="acceleration_limit_percent" default="100.0" />
 
-  <xacro:include filename="$(find mecademic_description)/urdf/meca_500_r3.xacro"/>
-  <xacro:meca_500_r3_robot prefix="$(arg prefix)" connected_to="$(arg connected_to)"/>
+  <xacro:include filename="$(find mecademic_description)/urdf/meca_500_r3.xacro" />
+  <xacro:meca_500_r3 prefix="$(arg prefix)" connected_to="$(arg connected_to)" />
 
-  <xacro:if value="${load_ros2_control}">
+  <xacro:if value="$(arg load_ros2_control)">
     <xacro:include filename="$(find mecademic_description)/ros2_control/meca_500_r3_tcpip.ros2_control.xacro" />
-    <xacro:meca_500_r3_tcpip_ros2_control
-            name="MecademicTcpIpInterface"
+    <xacro:meca_500_r3_tcpip_interface
             prefix="$(arg prefix)"
             robot_ip="$(arg robot_ip)"
             control_port="$(arg control_port)"
             monitoring_port="$(arg monitoring_port)"
             velocity_timeout="$(arg velocity_timeout)"
             velocity_limit_percent="$(arg velocity_limit_percent)"
-            acceleration_limit_percent="$(arg acceleration_limit_percent)"/>
+            acceleration_limit_percent="$(arg acceleration_limit_percent)" />
   </xacro:if>
 </robot>
