@@ -1,36 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="meca_500_r3_robot" params="
-    prefix
-    robot_ip
-    control_port
-    monitoring_port
-    connected_to:=''
-    velocity_timeout:=0.1
-    velocity_limit_percent:=25.0
-    acceleration_limit_percent:=100.0
-    load_ros2_control:=true
-    use_fake_hardware:=false
-    fake_sensor_commands:=false
-    initial_positions:=${dict(axis_1_joint=0.0,axis_2_joint=0.0,axis_3_joint=0.0,axis_4_joint=0.0,axis_5_joint=0.0,axis_6_joint=0.0)}">
-
-    <xacro:if value="${load_ros2_control}">
-      <!-- ros2 control include -->
-      <xacro:include filename="$(find mecademic_description)/urdf/meca_500_r3.ros2_control.xacro" />
-      <!-- ros2 control instance -->
-      <xacro:meca_500_r3_ros2_control
-        name="MecademicInterface"
-        prefix="${prefix}"
-        robot_ip="$(arg robot_ip)"
-        control_port="$(arg control_port)"
-        monitoring_port="$(arg monitoring_port)"
-        velocity_timeout="$(arg velocity_timeout)"
-        velocity_limit_percent="$(arg velocity_limit_percent)"
-        acceleration_limit_percent="$(arg acceleration_limit_percent)"
-        use_fake_hardware="$(arg use_fake_hardware)"
-        fake_sensor_commands="$(arg fake_sensor_commands)"/>
-    </xacro:if>
+  <xacro:macro name="meca_500_r3" params="prefix connected_to:=''">
 
     <xacro:if value="${connected_to == ''}">
       <link name="world" />

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="meca_500_r3">
+  <xacro:arg name="prefix" default="meca_500_" />
+  <xacro:arg name="connected_to" default="" />
+
+  <xacro:arg name="load_ros2_control" default="true" />
+  <xacro:arg name="robot_ip" default="0.0.0.0" />
+  <xacro:arg name="state_port" default="1801" />
+  <xacro:arg name="command_port" default="1802" />
+  <xacro:arg name="ft_sensor_port" default="1803" />
+  <xacro:arg name="bind_state_port" default="false" />
+  <xacro:arg name="bind_command_port" default="false" />
+  <xacro:arg name="bind_ft_sensor_port" default="false" />
+  <xacro:arg name="has_ft_sensor" default="true" />
+  <xacro:arg name="ft_sensor_name" default="minione_pro_ecat" />
+
+  <xacro:include filename="$(find mecademic_description)/urdf/meca_500_r3.xacro" />
+  <xacro:meca_500_r3 prefix="$(arg prefix)" connected_to="$(arg connected_to)" />
+
+  <xacro:if value="$(arg load_ros2_control)">
+    <xacro:include filename="$(find mecademic_description)/ros2_control/meca_500_r3_ecat.ros2_control.xacro" />
+    <xacro:meca_500_r3_ecat_interface
+            prefix="$(arg prefix)"
+            robot_ip="$(arg robot_ip)"
+            state_port="$(arg state_port)"
+            command_port="$(arg command_port)"
+            ft_sensor_port="$(arg ft_sensor_port)"
+            bind_state_port="$(arg bind_state_port)"
+            bind_command_port="$(arg bind_command_port)"
+            bind_ft_sensor_port="$(arg bind_ft_sensor_port)"
+            has_ft_sensor="$(arg has_ft_sensor)"
+            ft_sensor_name="$(arg ft_sensor_name)" />
+  </xacro:if>
+
+</robot>

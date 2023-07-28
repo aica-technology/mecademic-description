@@ -1,35 +1,24 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="meca_500_r3_ros2_control" params="
-    name
+  <xacro:macro name="meca_500_r3_tcpip_interface" params="
     prefix
     robot_ip
     control_port
     monitoring_port
     velocity_timeout
     velocity_limit_percent
-    acceleration_limit_percent
-    use_fake_hardware:=false
-    fake_sensor_commands:=false
-    initial_positions:=${dict(axis_1_joint=0.0,axis_2_joint=0.0,axis_3_joint=0.0,axis_4_joint=0.0,axis_5_joint=0.0,axis_6_joint=0.0)}">
+    acceleration_limit_percent">
 
-    <ros2_control name="${name}" type="system">
+    <ros2_control name="meca_500_r3_tcpip_interface" type="system">
       <hardware>
-        <xacro:if value="${use_fake_hardware}">
-          <plugin>fake_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
-          <param name="state_following_offset">0.0</param>
-        </xacro:if>
-        <xacro:unless value="${use_fake_hardware}">
-          <plugin>robot_interface/mecademic/MecademicInterface</plugin>
-          <param name="robot_ip">${robot_ip}</param>
-          <param name="control_port">${control_port}</param>
-          <param name="monitoring_port">${monitoring_port}</param>
-          <param name="velocity_timeout">${velocity_timeout}</param>
-          <param name="velocity_limit_percent">${velocity_limit_percent}</param>
-          <param name="acceleration_limit_percent">${acceleration_limit_percent}</param>
-        </xacro:unless>
+        <plugin>robot_interface/mecademic/MecademicTcpIpInterface</plugin>
+        <param name="robot_ip">${robot_ip}</param>
+        <param name="control_port">${control_port}</param>
+        <param name="monitoring_port">${monitoring_port}</param>
+        <param name="velocity_timeout">${velocity_timeout}</param>
+        <param name="velocity_limit_percent">${velocity_limit_percent}</param>
+        <param name="acceleration_limit_percent">${acceleration_limit_percent}</param>
       </hardware>
       <joint name="${prefix}axis_1_joint">
         <command_interface name="position">
@@ -43,7 +32,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_1_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
       <joint name="${prefix}axis_2_joint">
         <command_interface name="position">
@@ -57,7 +45,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_2_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
       <joint name="${prefix}axis_3_joint">
         <command_interface name="position">
@@ -71,7 +58,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_3_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
       <joint name="${prefix}axis_4_joint">
         <command_interface name="position">
@@ -85,7 +71,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_4_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
       <joint name="${prefix}axis_5_joint">
         <command_interface name="position">
@@ -99,7 +84,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_5_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
       <joint name="${prefix}axis_6_joint">
         <command_interface name="position">
@@ -113,7 +97,6 @@
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
-        <param name="initial_position">${initial_positions['axis_6_joint']}</param>  <!-- initial position for the FakeSystem -->
       </joint>
     </ros2_control>
   </xacro:macro>
