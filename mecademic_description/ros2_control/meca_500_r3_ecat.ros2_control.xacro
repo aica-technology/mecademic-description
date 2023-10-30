@@ -15,7 +15,7 @@
 
     <ros2_control name="meca_500_r3_ecat_interface" type="system">
       <hardware>
-        <plugin>robot_interface/mecademic/MecademicEtherCatInterface</plugin>
+        <plugin>robot_interface/LightWeightInterface</plugin>
         <param name="ip">${robot_ip}</param>
         <param name="state_port">${state_port}</param>
         <param name="command_port">${command_port}</param>
